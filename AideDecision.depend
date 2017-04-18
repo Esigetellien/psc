@@ -1,0 +1,101 @@
+# depslib dependency file v1.0
+1491906270 source:c:\users\vincent\desktop\aidedecision\main.cpp
+	<iostream>
+	"Structure.h"
+
+1491904227 c:\users\vincent\desktop\aidedecision\structure.h
+	<iostream>
+	<fstream>
+	<vector>
+
+1491906785 source:c:\users\vincent\desktop\aidedecision\lecturefichiers.cpp
+	<iostream>
+	"Structure.h"
+	<fstream>
+
+1491906678 source:c:\users\vincent\desktop\aidedecision\affichage.cpp
+	<iostream>
+	"Structure.h"
+
+1491906864 source:g:\aidedecision\affichage.cpp
+	<iostream>
+	"Structure.h"
+
+1491904228 g:\aidedecision\structure.h
+	<iostream>
+	<fstream>
+	<vector>
+
+1491906786 source:g:\aidedecision\lecturefichiers.cpp
+	<iostream>
+	"Structure.h"
+	<fstream>
+
+1491906272 source:g:\aidedecision\main.cpp
+	<iostream>
+	"Structure.h"
+
+1491906864 source:c:\users\vincent\desktop\11-04-2017-11h00-aidedecision\affichage.cpp
+	<iostream>
+	"Structure.h"
+
+1491904228 c:\users\vincent\desktop\11-04-2017-11h00-aidedecision\structure.h
+	<iostream>
+	<fstream>
+	<vector>
+
+1491911847 source:c:\users\vincent\desktop\11-04-2017-11h00-aidedecision\lecturefichiers.cpp
+	<iostream>
+	"Structure.h"
+	<fstream>
+
+1491906272 source:c:\users\vincent\desktop\11-04-2017-11h00-aidedecision\main.cpp
+	<iostream>
+	"Structure.h"
+
+1491921180 source:c:\users\vincent\desktop\aidedecision2\affichage.cpp
+	<iostream>
+	"Structure.h"
+
+1491921571 c:\users\vincent\desktop\aidedecision2\structure.h
+	<iostream>
+	<fstream>
+	<vector>
+	<stdlib.h>
+
+1491921153 source:c:\users\vincent\desktop\aidedecision2\main.cpp
+	<iostream>
+	"Structure.h"
+
+1491921515 source:c:\users\vincent\desktop\aidedecision2\lecturefichiers.cpp
+	<iostream>
+	"Structure.h"
+	<fstream>
+
+1491919246 source:c:\users\seven_8\work\psc\affichage.cpp
+	<iostream>
+	"Structure.h"
+
+1492418052 c:\users\seven_8\work\psc\structure.h
+	<iostream>
+	<fstream>
+	<vector>
+	<stdlib.h>
+
+1491919246 source:c:\users\seven_8\work\psc\lecturefichiers.cpp
+	<iostream>
+	"Structure.h"
+	<fstream>
+
+1492462178 source:c:\users\seven_8\work\psc\main.cpp
+	<iostream>
+	"Structure.h"
+	"resolve.h"
+
+1492462322 c:\users\seven_8\work\psc\resolve.h
+	"Structure.h"
+
+1492465610 source:c:\users\seven_8\work\psc\resolve.cpp
+	<iostream>
+	"resolve.h"
+
