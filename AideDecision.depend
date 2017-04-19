@@ -72,6 +72,7 @@
 	"Structure.h"
 	<fstream>
 
+<<<<<<< HEAD
 1491919246 source:c:\users\seven_8\work\psc\affichage.cpp
 	<iostream>
 	"Structure.h"
@@ -99,3 +100,5 @@
 	<iostream>
 	"resolve.h"
 
+=======
+>>>>>>> e5c45cab20d1e94f2de6e487fd79c43227eb0f28
