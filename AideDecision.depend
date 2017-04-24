@@ -72,12 +72,13 @@
 	"Structure.h"
 	<fstream>
 
-<<<<<<< HEAD
-1491919246 source:c:\users\seven_8\work\psc\affichage.cpp
+1491921515 D
+
+1493023166 source:c:\users\seven_8\work\psc\affichage.cpp
 	<iostream>
 	"Structure.h"
 
-1492418052 c:\users\seven_8\work\psc\structure.h
+1493022914 c:\users\seven_8\work\psc\structure.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -88,17 +89,19 @@
 	"Structure.h"
 	<fstream>
 
-1492462178 source:c:\users\seven_8\work\psc\main.cpp
+1493027775 source:c:\users\seven_8\work\psc\main.cpp
 	<iostream>
 	"Structure.h"
 	"resolve.h"
 
-1492462322 c:\users\seven_8\work\psc\resolve.h
+1493022641 c:\users\seven_8\work\psc\resolve.h
 	"Structure.h"
 
-1492465610 source:c:\users\seven_8\work\psc\resolve.cpp
+1493027214 source:c:\users\seven_8\work\psc\resolve.cpp
 	<iostream>
 	"resolve.h"
 
-=======
->>>>>>> e5c45cab20d1e94f2de6e487fd79c43227eb0f28
+1492465610 "
+
+1492465610 45cab20d1e94f2de6e487fd79c43227eb0f28
+

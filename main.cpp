@@ -6,11 +6,13 @@ using namespace std;
 
 int main()
 {
+
       int choix=0;
     //do
     //{
     system("cls");
-    char MonF[] ="pb1.txt";//Supprimer cette ligne lorsque l on mettra en place les differents fichiers
+    char MonF[] ="pb7.txt";//Supprimer cette ligne lorsque l on mettra en place les differents fichiers
+    //pbTest pb4 pb5 pb6
     Pb* Monpb;
     cout << "---- Projet Aide a la Decision ----"<<endl;
     cout<< "---------- Solveur PSC --------------\n\n"<<endl;
@@ -20,6 +22,8 @@ int main()
     Monpb= lecture(MonF);//Supprimer cette ligne lorsque l on mettra en place les differents fichiers
     affichage(Monpb);//Supprimer cette ligne lorsque l on mettra en place les differents fichiers
     vector<Variable> vectorNull;
+
+
     methodeTriviale(vectorNull, Monpb->var, Monpb->Cpb, Monpb);
    /* cin>> choix;//faire saisie secu
     switch(choix)

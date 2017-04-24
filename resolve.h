@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void methodeTriviale(vector<Variable> variablesAssignees, Variable* variables, Contraintes* contraintes, Pb *probleme);
-bool verifContraintes(vector<Variable> variablesAssignees, Variable* variables, Contraintes* contraintes, Pb *probleme);
+void methodeTriviale(vector<Variable> variablesAssignees, const Variable* variables, Contraintes* contraintes, const Pb *probleme);
+bool verifContraintes(vector<Variable> variablesAssignees, const Variable* variables, Contraintes* contraintes, const Pb *probleme);
 
 #endif // RESOLVE_H_INCLUDED

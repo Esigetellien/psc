@@ -1,7 +1,7 @@
 #include <iostream>
 #include "resolve.h"
 
-void methodeTriviale(vector<Variable> variablesAssignees, Variable* variables, Contraintes* contraintes, Pb *probleme)
+void methodeTriviale(vector<Variable> variablesAssignees, const Variable* variables, Contraintes* contraintes, const Pb *probleme)
 {
     /*
     for (int k = 0; k < variablesAssignees.size(); k++)
@@ -13,9 +13,9 @@ void methodeTriviale(vector<Variable> variablesAssignees, Variable* variables, C
     */
     int temp2;
     bool egal = true;
+
     if(variablesAssignees.size() == sizeof(variables) +1)
     {
-        //cout<< "VARIABLES: " << sizeof(variables)<<endl;
         for (int k = 0; k < variablesAssignees.size(); k++)
         {
             if (!variablesAssignees[k].indice == variables[k].indice)
@@ -27,14 +27,24 @@ void methodeTriviale(vector<Variable> variablesAssignees, Variable* variables, C
 
     if(egal)
     {
+        /*
+        cout<< "VARIABLES: ";
+        for (int i = 0; i < variablesAssignees.size(); i++)
+        {
+            cout << variablesAssignees[i].Val[0] << "  ";
+        }
+        cout<< endl;
+        */
 
         if (verifContraintes(variablesAssignees, variables, contraintes, probleme))
         {
-            cout<<"trace"<<endl;
+            cout<<"Resultat"<<endl;
             for (int k = 0; k < variablesAssignees.size(); k++)
             {
-                cout<<variablesAssignees[k].indice<< " : " << variablesAssignees[k].Val[0];
+                cout<<variablesAssignees[k].indice<< " : " << variablesAssignees[k].Val[0] << endl;
+
             }
+            return;
         }
         else
             return;
@@ -46,26 +56,44 @@ void methodeTriviale(vector<Variable> variablesAssignees, Variable* variables, C
 
         for(int x = 0; x < variables[variablesAssignees.size()].nbValeurs; x++)
         {
-            tempVar = variables[variablesAssignees.size()];
-            //int tempTab = (variables[variablesAssignees.size()].Val[x]);
-            tempVar.Val[0] = (variables[variablesAssignees.size()].Val[x]);
-
-            tempVariableAssigne.clear();
-            for(int j = 0; j < variablesAssignees.size(); j++)
+            //cout<<"trace1"<<endl;
+            if (variablesAssignees.size() < sizeof(variables)+1)
             {
-                tempVariableAssigne.push_back(variablesAssignees[j]);
-            }
-            tempVariableAssigne.push_back(tempVar);
+                tempVar = variables[variablesAssignees.size()];
+                //int tempTab = (variables[variablesAssignees.size()].Val[x]);
+                            //cout<<"trace2"<<endl;
+                if(tempVar.nbValeurs != 0 && (variablesAssignees.size() < sizeof(variables)+1))
+                    tempVar.Val[0] = (variables[variablesAssignees.size()].Val[x]);
+                else
+                    cout<<"erreur"<<endl;
 
-            methodeTriviale(tempVariableAssigne, variables, contraintes, probleme);
+                tempVariableAssigne.clear();
+                            //cout<<"trace4"<<endl;
+
+                for(int j = 0; j < variablesAssignees.size(); j++)
+                {
+                                //cout<<"trace5"<<endl;
+
+                    tempVariableAssigne.push_back(variablesAssignees[j]);
+                    //cout << "debug" << variablesAssignees[j].Val[0] << endl;
+                }
+                tempVariableAssigne.push_back(tempVar);
+
+                methodeTriviale(tempVariableAssigne, variables, contraintes, probleme);
+            }
+
         }
     }
 }
 
-bool verifContraintes(vector<Variable> variablesAssignees, Variable* variables, Contraintes* contraintes, Pb *MonPb)
+bool verifContraintes(vector<Variable> variablesAssignees, const Variable* variables, Contraintes* contraintes, const Pb *MonPb)
 {
     int temp;
     bool tempBool;
+    int test1, test2;
+    Variable variable1, variable2;
+
+    //affichage(MonPb);
 
     for(int k = 0; k < variablesAssignees.size(); k++)
     {
@@ -86,7 +114,7 @@ bool verifContraintes(vector<Variable> variablesAssignees, Variable* variables, 
         }
         if (tempBool == false)
         {
-            cout<<"debug2"<<endl;
+            //cout<<"debug2"<<endl;
             return false;
         }
 
@@ -100,13 +128,39 @@ bool verifContraintes(vector<Variable> variablesAssignees, Variable* variables, 
             //Variables egales
             for (int j = 0; j < MonPb->Cpb[i].nbContr; j++)
             {
-                if(variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] != variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0])
+                test1 = MonPb->Cpb[i].ListeContr[j];
+                for (int k = 0; k < MonPb->Cpb[i].nbContr; k++)
                 {
-                    cout<<"debug3"<<endl;
-                    //cout<<MonPb->Cpb[i].ListeContr[j] << ":" << MonPb->Cpb[i].ListeContr[0] <<endl;
-                    //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].indice << "->" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].indice <<endl;
-                    //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] << "=" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0] <<endl;
-                    return false;
+                    if(k != j)
+                    {
+                        test2 = MonPb->Cpb[i].ListeContr[k];
+                        for (int var = 0; var < variablesAssignees.size(); var++)
+                        {
+                            if(variablesAssignees[var].indice == test1)
+                            {
+                                variable1 = variablesAssignees[var];
+                            }
+                            if(variablesAssignees[var].indice == test2)
+                            {
+                                variable2 = variablesAssignees[var];
+                            }
+
+                        }
+                        //cout<<"debug"<< variable1.indice << " != " << variable2.indice << endl;
+                        if(variable1.Val[0] !=  variable2.Val[0])
+                        {
+
+
+                            //cout<<"debug"<< variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] << " != " << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0] << endl;
+                            //cout<<"debug"<< variablesAssignees[MonPb->Cpb[i].ListeContr[j]].indice << " != " << variablesAssignees[MonPb->Cpb[i].ListeContr[0]].indice << endl;
+                            //cout<<MonPb->Cpb[i].ListeContr[j] << ":" << MonPb->Cpb[i].ListeContr[0] <<endl;
+                            //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].indice << "->" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].indice <<endl;
+                            //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] << "=" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0] <<endl;
+                            return false;
+                        }
+                        //else
+                            //cout<<"debug 1" << endl;
+                    }
                 }
             }
             break;
@@ -114,42 +168,118 @@ bool verifContraintes(vector<Variable> variablesAssignees, Variable* variables, 
             //Variables differentes
             for (int j = 0; j < MonPb->Cpb[i].nbContr; j++)
             {
-                if(variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] == variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0])
+                test1 = MonPb->Cpb[i].ListeContr[j];
+                for (int k = 0; k < MonPb->Cpb[i].nbContr; k++)
                 {
-                    cout<<"debug4"<<endl;
-                    return false;
-                }
+                    if(k != j)
+                    {
+                        test2 = MonPb->Cpb[i].ListeContr[k];
+                        for (int var = 0; var < variablesAssignees.size(); var++)
+                        {
+                            if(variablesAssignees[var].indice == test1)
+                            {
+                                variable1 = variablesAssignees[var];
+                            }
+                            if(variablesAssignees[var].indice == test2)
+                            {
+                                variable2 = variablesAssignees[var];
+                            }
 
+                        }
+                        //cout<<"debug"<< variable1.indice << " != " << variable2.indice << endl;
+
+                        if(variable1.Val[0] ==  variable2.Val[0] && variable1.indice !=  variable2.indice)
+                        {
+                            //cout<<"debug"<< variable1.indice << " != " << variable2.indice << endl;
+                            //cout<<"debug"<< variablesAssignees[MonPb->Cpb[i].ListeContr[j]].indice << " != " << variablesAssignees[MonPb->Cpb[i].ListeContr[0]].indice << endl;
+                            //cout<<MonPb->Cpb[i].ListeContr[j] << ":" << MonPb->Cpb[i].ListeContr[0] <<endl;
+                            //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].indice << "->" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].indice <<endl;
+                            //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] << "=" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0] <<endl;
+                            return false;
+                        }
+                        //else
+                            //cout<<"debug 2" << endl;
+                    }
+                }
             }
             break;
          case 3:
             //Variable inferieure ou egale a une autre
             for (int j = 0; j < MonPb->Cpb[i].nbContr; j++)
             {
-                if(variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] <= variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0])
+                test1 = MonPb->Cpb[i].ListeContr[j];
+                for (int k = 0; k < MonPb->Cpb[i].nbContr; k++)
                 {
-                    cout<<"debug5"<<endl;
-                    return false;
-                }
+                    if(k != j)
+                    {
+                        test2 = MonPb->Cpb[i].ListeContr[k];
+                        for (int var = 0; var < variablesAssignees.size(); var++)
+                        {
+                            if(variablesAssignees[var].indice == test1)
+                            {
+                                variable1 = variablesAssignees[var];
+                            }
+                            if(variablesAssignees[var].indice == test2)
+                            {
+                                variable2 = variablesAssignees[var];
+                            }
 
+                        }
+                        //cout<<"debug"<< variable1.indice << " != " << variable2.indice << endl;
+                        if(variable1.Val[0] >  variable2.Val[0] )
+                        {
+                            //cout<<"debug"<< variable1.indice << " != " << variable2.indice << endl;
+                            //cout<<"debug"<< variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] << " != " << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0] << endl;
+                            //cout<<"debug"<< variablesAssignees[MonPb->Cpb[i].ListeContr[j]].indice << " != " << variablesAssignees[MonPb->Cpb[i].ListeContr[0]].indice << endl;
+                            //cout<<MonPb->Cpb[i].ListeContr[j] << ":" << MonPb->Cpb[i].ListeContr[0] <<endl;
+                            //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].indice << "->" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].indice <<endl;
+                            //cout<<variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] << "=" << variablesAssignees[MonPb->Cpb[i].ListeContr[0]-1].Val[0] <<endl;
+                            return false;
+                        }
+                        else
+                        {
+                            j = MonPb->Cpb[i].nbContr;
+                            k = MonPb->Cpb[i].nbContr;
+                        }
+                            //cout<<"debug 3" << endl;
+                    }
+                }
             }
             break;
          case 4:
             //Somme de variable egales a une valeur determinee
             temp = 0;
-            for (int j = 0; j < MonPb->Cpb[i].nbContr; j++)
+            //cout<<"debug ";
+            //cout << "debug ";
+            for (int j = 1; j < MonPb->Cpb[i].nbContr; j++)
             {
-                temp += variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0];
+                test1 = MonPb->Cpb[i].ListeContr[j];
+
+                for (int var = 0; var < variablesAssignees.size(); var++)
+                {
+                    if(variablesAssignees[var].indice == test1)
+                    {
+
+                        variable1 = variablesAssignees[var];
+                    }
+                }
+                temp += variable1.Val[0];
+                //cout << " + " << variable1.indice;
+                //cout << variablesAssignees[MonPb->Cpb[i].ListeContr[j]-1].Val[0] << " + ";
             }
+            //cout << endl;
             if(temp != MonPb->Cpb[i].ListeContr[0])
             {
-                cout<<"debug6"<<endl;
+                //cout<<" != "<< MonPb->Cpb[i].ListeContr[0] << endl;
+                //cout<<"debug6"<<endl;
                 return false;
             }
-
+            else
+                cout<<"debug 4" << endl;
+            //cout <<endl;
             break;
 
-        default: cout<<"Erreur de description"<<endl;
+        //default: cout<<"Erreur de description"<<endl;
         break;
         }
     }

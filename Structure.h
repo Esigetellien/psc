@@ -33,5 +33,5 @@ struct Pb
 };
 
 Pb* lecture(char* MonF);
-void affichage(Pb* MonPb);
+void affichage(const Pb* MonPb);
 #endif // STRUCTURE_H_INCLUDED

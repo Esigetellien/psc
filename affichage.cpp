@@ -3,7 +3,7 @@
 
 using namespace std;
 
- void affichage(Pb* MonPb)
+ void affichage(const Pb* MonPb)
  {
      cout<<"\n \n====== Affichage =======\n"<<endl;
      cout<<"Nombre de Variables: "<< MonPb->nbVar<<endl;
@@ -51,7 +51,7 @@ using namespace std;
         {
             for(int j=0;j<MonPb->Cpb[i].nbContr; j++)
             {
-                cout<<" "<<MonPb->Cpb[i].ListeContr[j]<<" ";
+                cout<< " J (" << j << ")" << " "<<MonPb->Cpb[i].ListeContr[j]<<" ";
             }
         }
 
